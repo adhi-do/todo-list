@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Todo</title>
+<style>
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <div class="top-bar">
+    <h1>My Todo List</h1>
+    <div class="top-buttons">
+      <button id="exportBtn" class="toggle-btn" title="Export tasks as JSON">⬇️ Export</button>
+      <button id="importBtn" class="toggle-btn" title="Import tasks from JSON">⬆️ Import</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+      <button id="incognitoBtn" class="toggle-btn" title="Toggle incognito mode">🕶️ Incognito</button>
+      <button id="themeBtn" class="toggle-btn" title="Toggle dark mode">🌙</button>
+    </div>
+  </div>
+
+  <div id="modeBanner" class="mode-banner">Incognito mode: tasks and labels are saved only for this browser tab session</div>
+
+  <div class="labels-section">
+    <div class="section-title">Labels (click a label to filter)</div>
+    <div class="label-add-row">
+      <input type="text" id="labelInput" placeholder="New label name..." maxlength="30">
+      <input type="color" id="labelColor" value="#4CAF50" title="Label color">
+      <button id="addLabelBtn">Add</button>
+    </div>
+    <div id="labelList" class="label-list"></div>
+  </div>
+
+  <div class="input-row">
+    <input type="text" id="taskInput" placeholder="Add a new task..." maxlength="200">
+    <select id="labelSelect" title="Assign label"><option value="">No label</option></select>
+    <button id="addBtn">Add</button>
+  </div>
+
+  <ul id="taskList"></ul>
+</div>
+
+<!--
+  Plain <script> tags (NOT type="module") on purpose:
+  ES modules are blocked by browsers when a page is opened directly as a
+  file (file://) instead of through a server, because of CORS rules.
+  Regular scripts don't have that restriction, so double-clicking
+  index.html always works.
+
+  Load order matters: each file below expects the functions/variables
+  from the files above it to already exist.
+-->
+<script src="js/storage.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/labels.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/export-import.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
